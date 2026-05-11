@@ -21,7 +21,7 @@ public class ItemPedido {
         return String.format("| %-5d | %-10s | %-5d |",
                 ID, item.obtenerNombre(),cantidad);
     }
-    public int obtenerSubtotal()
+    public double obtenerSubtotal()
     {
         return cantidad* item.obtenerPrecio();
     }
