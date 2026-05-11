@@ -14,8 +14,8 @@ public class Pedido {
         return id;
     }
 
-    public int obtenerTotal(){
-        int total = 0;
+    public double obtenerTotal(){
+        double total = 0;
         for(ItemPedido item: items){
             total+=item.obtenerSubtotal();
         }
