@@ -1,5 +1,7 @@
 package org.models;
 import org.exceptions.PrecioInvalidoException;
+import org.exceptions.StockInvalidoException;
+
 public class Producto {
     private String nombre;
     private String descripcion;
@@ -29,4 +31,19 @@ public class Producto {
         }
         return this.precio = precio;
     }
+     public void aumentarStock(int stock) {
+        if(stock<0){
+            throw new StockInvalidoException("Cantidad invalida a aumentar");
+        }
+        this.stock += stock;
+     }
+     public void reducirStock(int stock) {
+        if(stock<0){
+            throw new StockInvalidoException("Precio invalida a reducir");
+        }
+         if (stock > this.stock) {
+             throw new StockInvalidoException("Stock insuficiente. Disponible: " + this.stock);
+         }
+        this.stock -= stock;
+     }
 }
