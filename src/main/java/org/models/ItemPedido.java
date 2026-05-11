@@ -1,5 +1,7 @@
 package org.models;
 
+import org.exceptions.CantidadInvalidaException;
+
 public class ItemPedido {
     private int ID;
     private int cantidad;
@@ -7,6 +9,9 @@ public class ItemPedido {
 
     public ItemPedido( int cantidad, Vendible item)
     {
+        if(cantidad<=0){
+            throw new CantidadInvalidaException("Cantidad invalida, debe ser mayor a 0.");
+        }
         this.ID = item.obtenerID();
         this.cantidad = cantidad;
         this.item = item;
