@@ -1,5 +1,5 @@
 package org.models;
-
+import org.exceptions.PrecioInvalidoException;
 public class Producto {
     private String nombre;
     private String descripcion;
@@ -24,7 +24,9 @@ public class Producto {
         return precio;
     }
     public int actualizarPrecio(int precio) {
-
+        if(precio<0){
+            throw new PrecioInvalidoException("Precio invalido");
+        }
         return this.precio = precio;
     }
 }
