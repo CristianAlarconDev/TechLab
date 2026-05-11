@@ -16,6 +16,9 @@ public class Producto implements Vendible {
         this.ID = ID;
         this.stock = stock;
     }
+    public int obtenerID() {
+        return ID;
+    }
     public String obtenerNombre() {
         return nombre;
     }
