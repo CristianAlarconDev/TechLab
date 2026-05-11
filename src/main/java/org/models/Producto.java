@@ -19,6 +19,9 @@ public class Producto implements Vendible {
     public int obtenerID() {
         return ID;
     }
+    public boolean poseeElId(int id){
+        return ID == id;
+    }
     public String obtenerNombre() {
         return nombre;
     }

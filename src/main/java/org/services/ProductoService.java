@@ -30,8 +30,8 @@ public class ProductoService {
 
         Vendible vendible = null;
         for (Producto producto: productos)
-        {   /*delegar luego a producto la comparación*/
-            if (producto.obtenerID()==idProducto){
+        {   /*asumo id único*/
+            if (producto.poseeElId(idProducto)){
                 vendible=producto;
             }
         }
