@@ -46,4 +46,8 @@ public class Producto {
          }
         this.stock -= stock;
      }
+     public String mostrarInformacion(){
+         return String.format("| %-5d | %-10s | %-10d | %-10s | %-4s |",
+                 ID, obtenerNombre(), obtenerPrecio(), obtenerDescripcion(), stock);
+     }
 }
