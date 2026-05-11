@@ -2,7 +2,7 @@ package org.models;
 import org.exceptions.PrecioInvalidoException;
 import org.exceptions.StockInvalidoException;
 
-public class Producto {
+public class Producto implements Vendible {
     private String nombre;
     private String descripcion;
     private int precio;
