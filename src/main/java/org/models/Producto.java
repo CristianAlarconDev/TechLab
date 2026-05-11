@@ -1,4 +1,4 @@
-package learning.models;
+package org.models;
 
 public class Producto {
     private String nombre;
