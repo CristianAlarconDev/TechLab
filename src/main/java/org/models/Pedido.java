@@ -27,4 +27,14 @@ public class Pedido {
     public void removerItem(ItemPedido item){
         items.remove(item);
     }
+    public String obtenerResumen() {
+        StringBuilder resumen = new StringBuilder();
+        resumen.append("--- RESUMEN DE PEDIDO N° ").append(id).append(" ---\n");
+        for (ItemPedido item : items) {
+            resumen.append(item.mostrarDescripcion()).append("\n");
+        }
+        resumen.append("---------------------------------\n");
+        resumen.append(String.format("TOTAL A PAGAR: $%.2f", obtenerTotal()));
+        return resumen.toString();
+    }
 }
