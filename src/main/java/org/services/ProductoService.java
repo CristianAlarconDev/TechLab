@@ -18,26 +18,31 @@ public class ProductoService {
     {
         productos.add(producto);
     }
-    public void  eliminarProducto(Producto producto)
-    {
-        productos.remove(producto);
+    public void  eliminarProducto(int idProducto) {
+        /*luego llevar los print a una clase o delegarlo*/
+        try {
+            Producto producto = obtenerProducto(idProducto);
+            productos.remove(producto);
+            System.out.println("Éxito: El producto ha sido eliminado del sistema.");
+
+        } catch (IdNoEncontradoException error) {
+            System.out.println("Error: " + error.getMessage());
+        }
     }
     public Vendible obtenerVendible(int idProducto)
+    {   //recordar que quien use vendible debe usar try-catch para el manejo
+        return obtenerProducto(idProducto);
+    }
+    private Producto obtenerProducto(int idProducto)
     {
         if(idProducto <= 0){
-            throw new CantidadInvalidaException("El id es invalido");
+            throw new IdNoEncontradoException("El id es invalido");
         }
-
-        Vendible vendible = null;
-        for (Producto producto: productos)
-        {   /*asumo id único*/
+        for(Producto producto: productos){
             if (producto.poseeElId(idProducto)){
-                vendible=producto;
+                return  producto;
             }
         }
-        if (vendible==null){
-            throw new IdNoEncontradoException("No existe el producto con el id: "+idProducto);
-        }
-        return vendible;
+        throw new IdNoEncontradoException("No existe el producto con ID: " + idProducto);
     }
 }
