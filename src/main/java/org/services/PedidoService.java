@@ -1,6 +1,7 @@
 package org.services;
 
 import org.exceptions.IdNoEncontradoException;
+import org.exceptions.PedidoNoIniciadoException;
 import org.models.GeneradorID;
 import org.models.Pedido;
 import org.models.Vendible;
@@ -22,9 +23,7 @@ public class PedidoService {
 
     }
     public void agregarItemAlPedido(int idProducto, int cantidad){
-        if (pedidoEnProceso == null)
-        {   return;
-        }
+        checkPedidoEnProceso();
         try {
             Vendible vendible = productoService.obtenerVendible(idProducto);
             ItemPedido nuevoItem = new ItemPedido(cantidad, vendible);
@@ -37,9 +36,7 @@ public class PedidoService {
             }
     }
     public void eliminarItemAlPedido(int idVendible){
-        if (pedidoEnProceso == null)
-        {   return;
-        }
+        checkPedidoEnProceso();
         try {
             pedidoEnProceso.removerItem(idVendible);
         } catch (IdNoEncontradoException e) {
@@ -47,14 +44,16 @@ public class PedidoService {
         }
     }
     public double obtenerTotal(){
-        //validar luego con un pedido no iniciado exception al igual que todos los null en esta clase
-        if (pedidoEnProceso == null)
-        {   return 0;
-        }
+        checkPedidoEnProceso();
         return pedidoEnProceso.obtenerTotal();
     }
     public void finalizarPedido(){
         pedidoEnProceso = null;
+    }
+    private void checkPedidoEnProceso(){
+        if(pedidoEnProceso == null)
+        {   throw new PedidoNoIniciadoException("Pedido no iniciado.");
+        }
     }
 
 }
