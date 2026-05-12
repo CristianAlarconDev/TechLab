@@ -50,4 +50,9 @@ public class ProductoService {
         Producto producto = obtenerProducto(idProducto);
         return producto.tieneStockPara(cantidad);
     }
+    public void descontarStock(int idProducto, int cantidad)
+    {
+        Producto producto = obtenerProducto(idProducto);
+        producto.reducirStock(cantidad);
+    }
 }
