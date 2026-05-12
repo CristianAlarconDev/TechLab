@@ -46,5 +46,15 @@ public class PedidoService {
             System.err.println(e.getMessage());
         }
     }
+    public double obtenerTotal(){
+        //validar luego con un pedido no iniciado exception al igual que todos los null en esta clase
+        if (pedidoEnProceso == null)
+        {   return 0;
+        }
+        return pedidoEnProceso.obtenerTotal();
+    }
+    public void finalizarPedido(){
+        pedidoEnProceso = null;
+    }
 
 }
