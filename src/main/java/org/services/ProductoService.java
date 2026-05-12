@@ -45,4 +45,9 @@ public class ProductoService {
         }
         throw new IdNoEncontradoException("No existe el producto con ID: " + idProducto);
     }
+   public boolean hayStockDeProducto(int idProducto, int cantidad)
+    {
+        Producto producto = obtenerProducto(idProducto);
+        return producto.tieneStockPara(cantidad);
+    }
 }
