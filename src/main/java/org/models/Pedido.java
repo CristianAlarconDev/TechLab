@@ -1,5 +1,7 @@
 package org.models;
 
+import org.exceptions.IdNoEncontradoException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +11,6 @@ public class Pedido {
     public Pedido(int id) {
         this.id = id;
         this.items = new ArrayList<>();
-    }
-    public int obtenerId() {
-        return id;
     }
 
     public double obtenerTotal(){
@@ -24,7 +23,8 @@ public class Pedido {
     public void agregarItem(ItemPedido item){
         items.add(item);
     }
-    public void removerItem(ItemPedido item){
+    public void removerItem(int idProducto){
+        ItemPedido item = obtenerItem(idProducto);
         items.remove(item);
     }
     public String obtenerResumen() {
@@ -36,5 +36,13 @@ public class Pedido {
         resumen.append("---------------------------------\n");
         resumen.append(String.format("TOTAL A PAGAR: $%.2f", obtenerTotal()));
         return resumen.toString();
+    }
+    private ItemPedido obtenerItem(int idProducto){
+        for(ItemPedido item: items){
+            if (item.tieneId(idProducto)){
+                return item;
+            }
+        }
+        throw new IdNoEncontradoException("No se encontró id a remover del pedido." + idProducto);
     }
 }

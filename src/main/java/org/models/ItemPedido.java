@@ -25,4 +25,8 @@ public class ItemPedido {
     {
         return cantidad* item.obtenerPrecio();
     }
+    public boolean tieneId(int idProducto)
+    {
+        return ID == idProducto;
+    }
 }
