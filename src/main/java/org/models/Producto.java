@@ -56,4 +56,7 @@ public class Producto implements Vendible {
          return String.format("| %-5d | %-10s | %-10d | %-10s | %-4s |",
                  ID, obtenerNombre(), obtenerPrecio(), obtenerDescripcion(), stock);
      }
+     public boolean tieneStockPara(int cantidad) {
+        return stock>=cantidad;
+     }
 }
