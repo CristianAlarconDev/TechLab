@@ -51,7 +51,18 @@ public class PedidoService {
         return pedidoEnProceso.obtenerTotal();
     }
     public void finalizarPedido(){
-        pedidoEnProceso = null;
+        checkPedidoEnProceso();
+        try {
+            for (ItemPedido item : pedidoEnProceso.obtenerItems()) {
+                productoService.descontarStock(item.obtenerId(), item.obtenerCantidad());
+            }
+            System.out.println("Pedido finalizado con éxito.");
+            System.out.println(pedidoEnProceso.obtenerResumen());
+
+            pedidoEnProceso = null;
+        } catch (Exception e) {
+            System.err.println("Error crítico al procesar el pedido: " + e.getMessage());
+        }
     }
     private void checkPedidoEnProceso(){
         if(pedidoEnProceso == null)
