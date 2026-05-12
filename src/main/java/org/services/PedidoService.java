@@ -25,10 +25,13 @@ public class PedidoService {
     public void agregarItemAlPedido(int idProducto, int cantidad){
         checkPedidoEnProceso();
         try {
-            Vendible vendible = productoService.obtenerVendible(idProducto);
-            ItemPedido nuevoItem = new ItemPedido(cantidad, vendible);
-            pedidoEnProceso.agregarItem(nuevoItem);
-            System.out.println("Agregado: " + vendible.obtenerNombre() + " x" + cantidad);
+            if(productoService.hayStockDeProducto(idProducto, cantidad)){
+                Vendible vendible = productoService.obtenerVendible(idProducto);
+                ItemPedido nuevoItem = new ItemPedido(cantidad, vendible);
+                pedidoEnProceso.agregarItem(nuevoItem);
+                System.out.println("Agregado: " + vendible.obtenerNombre() + " x" + cantidad);
+            }
+
         }
         catch (Exception error)
             {
