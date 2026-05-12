@@ -29,4 +29,12 @@ public class ItemPedido {
     {
         return ID == idProducto;
     }
+    public int obtenerId()
+    {
+        return item.obtenerID();
+    }
+    public int obtenerCantidad()
+    {
+        return cantidad;
+    }
 }
