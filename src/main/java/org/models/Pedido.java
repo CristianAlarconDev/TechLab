@@ -3,6 +3,7 @@ package org.models;
 import org.exceptions.IdNoEncontradoException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Pedido {
@@ -44,5 +45,10 @@ public class Pedido {
             }
         }
         throw new IdNoEncontradoException("No se encontró id a remover del pedido." + idProducto);
+    }
+
+    //Esto rompería demeter o el principio de menor conocimiento hasta que vea otra forma de consumir cantidad e id de cada item
+    public List<ItemPedido> obtenerItems() {
+        return Collections.unmodifiableList(this.items);
     }
 }
