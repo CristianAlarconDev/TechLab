@@ -1,6 +1,7 @@
 package techlab.services;
 
 import techlab.exceptions.IdNoEncontradoException;
+import techlab.models.ConsolaUI;
 import techlab.models.Producto;
 import techlab.models.Vendible;
 
@@ -17,15 +18,15 @@ public class ProductoService {
     {
         productos.add(producto);
     }
-    public void  eliminarProducto(int idProducto) {
+    public void  eliminarProducto(int idProducto, ConsolaUI ui) {
         /*luego llevar los print a una clase o delegarlo*/
         try {
             Producto producto = obtenerProducto(idProducto);
             productos.remove(producto);
-            System.out.println("Éxito: El producto ha sido eliminado del sistema.");
+            ui.mostrarMensaje("Éxito: El producto ha sido eliminado del sistema.");
 
         } catch (IdNoEncontradoException error) {
-            System.out.println("Error: " + error.getMessage());
+            ui.mostrarMensaje("Error: " + error.getMessage());
         }
     }
     public Vendible obtenerVendible(int idProducto)
@@ -77,17 +78,14 @@ public class ProductoService {
         Producto producto = obtenerProducto(idProducto);
         producto.reducirStock(cantidad);
     }
-    public void mostrarProductos() {
+    public void mostrarProductos(ConsolaUI ui) {
         if (productos.isEmpty()) {
-            System.out.println("El inventario está vacío.");
+            ui.mostrarMensaje("El inventario está vacío.");
             return;
         }
-        System.out.println("=============================================================================");
-        System.out.println("| ID    | Nombre     | Precio     | Descripción          | Stock |");
-        System.out.println("=============================================================================");
+        ui.mostrarCabecera();
         for (Producto producto : productos) {
-            System.out.println(producto.mostrarInformacion());
+            ui.mostrar(producto);
         }
-        System.out.println("=============================================================================");
     }
 }
