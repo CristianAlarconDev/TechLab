@@ -64,11 +64,10 @@ public class MenuPrincipal {
         String nombre = capturarTexto("Nombre");
         String descripcion = capturarTexto("Descripción");
         int precio = capturarEntero("Precio");
-        int id = capturarEntero("ID");
         int stock = capturarEntero("Stock");
         try {
-            productoService.agregarProducto(new Producto(nombre, descripcion, precio, id, stock));
-            consolaUI.mostrarMensaje("Éxito: Producto registrado.");
+            productoService.agregarProducto(nombre, descripcion, precio, stock);
+            consolaUI.mostrarMensaje("Éxito: Producto registrado y asignado ID automáticamente.");
         } catch (Exception e) {
             consolaUI.mostrarMensaje("No se pudo agregar: " + e.getMessage());
         }
