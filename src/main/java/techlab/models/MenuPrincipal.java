@@ -32,10 +32,11 @@ public class MenuPrincipal {
         System.out.println("1) Agregar producto");
         System.out.println("2) Listar productos");
         System.out.println("3) Buscar producto" );
-        System.out.println("4) Eliminar producto");
-        System.out.println("5) Crear un pedido");
-        System.out.println("6) Listar pedidos (Resumen)");
-        System.out.println("7) Salir");
+        System.out.println("4) Actualizar producto" );
+        System.out.println("5) Eliminar producto");
+        System.out.println("6) Crear un pedido");
+        System.out.println("7) Listar pedidos (Resumen)");
+        System.out.println("8) Salir");
         System.out.print("Elija una opción: ");
     }
 
@@ -44,10 +45,11 @@ public class MenuPrincipal {
             case 1 -> subMenuAgregarProducto();
             case 2 -> productoService.mostrarProductos();
             case 3 -> subMenuBuscarProducto();
-            case 4 -> subMenuEliminarProducto();
-            case 5 -> subMenuIniciarPedido();
-            case 6 -> pedidoService.mostrarHistorialDePedidos();
-            case 7 -> {
+            case 4 -> subMenuActualizarProducto();
+            case 5 -> subMenuEliminarProducto();
+            case 6 -> subMenuIniciarPedido();
+            case 7 -> pedidoService.mostrarHistorialDePedidos();
+            case 8 -> {
                 System.out.println("Cerrando sistema...");
                 seguirMostrando = false;
             }
@@ -79,6 +81,34 @@ public class MenuPrincipal {
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
+        }
+    }
+    private void subMenuActualizarProducto() {
+        System.out.print("Ingrese el ID del producto a modificar: ");
+        int id = capturarEntero();
+        try {
+            System.out.println("¿Qué desea modificar? (1: Precio, 2: Stock, 0: Cancelar)");
+            int opt = capturarEntero();
+            String resultado = "";
+            switch (opt) {
+                case 1 -> {
+                    System.out.print("Ingrese el nuevo Precio: ");
+                    int nuevoPrecio = capturarEntero();
+                    resultado = productoService.actualizarPrecioDe(id, nuevoPrecio);
+                    System.out.println(resultado);
+                }
+                case 2 -> {
+                    System.out.print("Ingrese la cantidad: ");
+                    int cantidadStock = capturarEntero();
+                    resultado = productoService.actualizarStockDe(id, cantidadStock);
+                    System.out.println(resultado);
+                }
+                case 0 -> System.out.println("Se ha cancelado la actualización correctamente.");
+                default -> System.out.println("Opción no válida.");
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
     private void subMenuEliminarProducto() {
