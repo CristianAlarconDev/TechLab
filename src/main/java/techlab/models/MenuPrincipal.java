@@ -30,7 +30,7 @@ public class MenuPrincipal {
     public void lanzar() {
         while (seguirMostrando) {
             mostrarOpciones();
-            int opcion = capturarEntero();
+            int opcion = capturarEntero("Elija una opción");
             procesarOpcion(opcion);
         }
     }
@@ -53,83 +53,76 @@ public class MenuPrincipal {
             case 6 -> subMenuIniciarPedido();
             case 7 -> pedidoService.mostrarHistorialDePedidos(new ConsolaUI());
             case 8 -> {
-                System.out.println("Cerrando sistema...");
+                consolaUI.mostrarMensaje("Cerrando sistema...");
                 seguirMostrando = false;
             }
-            default -> System.out.println("Opción no válida.");
+            default -> consolaUI.mostrarMensaje("Opción no válida.");
         }
     }
-    //desacoplar luego del print
+
     private void subMenuAgregarProducto() {
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Descripción: ");
-        String descripcion = scanner.nextLine();
-        System.out.print("Precio: ");
-        int precio = scanner.nextInt();
-        System.out.print("ID: ");
-        int id = scanner.nextInt();
-        System.out.print("Stock: ");
-        int stock = scanner.nextInt();
-        productoService.agregarProducto(new Producto(nombre, descripcion, precio, id, stock));
+        consolaUI.mostrarMensaje("\n--- ALTA DE PRODUCTO ---");
+        String nombre = capturarTexto("Nombre");
+        String descripcion = capturarTexto("Descripción");
+        int precio = capturarEntero("Precio");
+        int id = capturarEntero("ID");
+        int stock = capturarEntero("Stock");
+        try {
+            productoService.agregarProducto(new Producto(nombre, descripcion, precio, id, stock));
+            consolaUI.mostrarMensaje("Éxito: Producto registrado.");
+        } catch (Exception e) {
+            consolaUI.mostrarMensaje("No se pudo agregar: " + e.getMessage());
+        }
     }
     //desacoplar luego del print
     private void subMenuBuscarProducto() {
-        System.out.println("\n--- BÚSQUEDA DE PRODUCTO ---");
-        System.out.println("1. Buscar por ID");
-        System.out.println("2. Buscar por Nombre");
-        System.out.print("Seleccione una opción: ");
-        int modo = capturarEntero();
+        consolaUI.mostrarMensaje("\n--- BÚSQUEDA DE PRODUCTO ---");
+        consolaUI.mostrarMensaje("1. Buscar por ID\n2. Buscar por Nombre");
+        int modo = capturarEntero("Seleccione una opción");
         try {
             switch (modo) {
                 case 1 -> {
-                    System.out.print("Ingrese ID a buscar: ");
-                    int id = capturarEntero();
-                    System.out.println("Producto encontrado: " + productoService.mostrarInformacionPorID(id));
+                    int id = capturarEntero("Ingrese ID a buscar");
+                    consolaUI.mostrarMensaje("Producto encontrado: " + productoService.mostrarInformacionPorID(id));
                 }
                 case 2 -> {
-                    System.out.print("Ingrese nombre del producto: ");
-                    String nombre = scanner.nextLine();
-                    System.out.println("Producto encontrado: " + productoService.buscarPorNombre(nombre));
+                    String nombre = capturarTexto("Ingrese nombre del producto");
+                    consolaUI.mostrarMensaje("Producto encontrado: " + productoService.buscarPorNombre(nombre));
                 }
-                default -> System.out.println("Opción de búsqueda no válida.");
+                default -> consolaUI.mostrarMensaje("Opción de búsqueda no válida.");
             }
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+            consolaUI.mostrarMensaje("Error: " + e.getMessage());
         }
     }
     private void subMenuActualizarProducto() {
-        System.out.print("Ingrese el ID del producto a modificar: ");
-        int id = capturarEntero();
+        int id = capturarEntero("Ingrese el ID del producto a modificar");
         try {
-            System.out.println("¿Qué desea modificar? (1: Precio, 2: Stock, 0: Cancelar)");
-            int opt = capturarEntero();
-            String resultado = "";
+            consolaUI.mostrarMensaje("¿Qué desea modificar? (1: Precio, 2: Stock, 0: Cancelar)");
+            int opt = capturarEntero("Opción");
+            String resultado;
             switch (opt) {
                 case 1 -> {
-                    System.out.print("Ingrese el nuevo Precio: ");
-                    int nuevoPrecio = capturarEntero();
+                    int nuevoPrecio = capturarEntero("Ingrese el nuevo Precio");
                     resultado = productoService.actualizarPrecioDe(id, nuevoPrecio);
-                    System.out.println(resultado);
+                    consolaUI.mostrarMensaje(resultado);
                 }
                 case 2 -> {
-                    System.out.print("Ingrese la cantidad: ");
-                    int cantidadStock = capturarEntero();
+                    int cantidadStock = capturarEntero("Ingrese el nuevo Stock");
                     resultado = productoService.actualizarStockDe(id, cantidadStock);
-                    System.out.println(resultado);
+                    consolaUI.mostrarMensaje(resultado);
                 }
-                case 0 -> System.out.println("Se ha cancelado la actualización correctamente.");
-                default -> System.out.println("Opción no válida.");
+                case 0 -> consolaUI.mostrarMensaje("Se ha cancelado la actualización correctamente.");
+                default -> consolaUI.mostrarMensaje("Opción no válida.");
             }
 
         } catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
+            consolaUI.mostrarMensaje("Error: " + e.getMessage());
         }
     }
     private void subMenuEliminarProducto() {
-        System.out.print("Ingrese ID a eliminar: ");
-        int id = scanner.nextInt();
-        productoService.eliminarProducto(id, new ConsolaUI());
+        int id = capturarEntero("Ingrese ID a eliminar");
+        productoService.eliminarProducto(id, consolaUI);
     }
     private void subMenuIniciarPedido() {
         pedidoService.iniciarPedido();
@@ -162,15 +155,20 @@ public class MenuPrincipal {
     private boolean noContinuaElPedido(int opcion) {
         return opcion==0;
     }
-    private int capturarEntero() {
-        try {
-            int num = scanner.nextInt();
-            scanner.nextLine();
-            return num;
-        } catch (Exception e) {
-            scanner.nextLine();
-            return -1;
+    private int capturarEntero(String campo) {
+        while (true) {
+            try {
+                consolaUI.mostrarMensaje(campo + ": ");
+                String input = scanner.nextLine();
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                consolaUI.mostrarMensaje("Error: Debe ingresar un número entero válido.");
+            }
         }
+    }
+    private String capturarTexto(String campo) {
+        System.out.print(campo + ": ");
+        return scanner.nextLine().trim();
     }
 
 }
