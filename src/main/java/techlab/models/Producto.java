@@ -10,6 +10,12 @@ public class Producto implements Vendible {
     private int stock;
 
     public Producto(String nombre, String descripcion, int precio, int ID, int stock) {
+        if(stock<=0){
+            throw new StockInvalidoException("Cantidad invalida de stock");
+        }
+        if(precio<=0){
+            throw new PrecioInvalidoException("Precio invalido");
+        }
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
