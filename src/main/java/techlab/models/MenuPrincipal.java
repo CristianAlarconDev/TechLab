@@ -12,8 +12,8 @@ public class MenuPrincipal {
     private final PedidoService pedidoService;
     private final Scanner scanner;
     private boolean seguirMostrando;
-    private ConsolaUI consolaUI;
-    private List<String> opciones;
+    private final ConsolaUI consolaUI;
+    private final List<String> opciones;
 
     public MenuPrincipal(ProductoService ps, PedidoService pedS) {
         this.productoService = ps;
@@ -127,29 +127,22 @@ public class MenuPrincipal {
     private void subMenuIniciarPedido() {
         pedidoService.iniciarPedido();
         boolean agregando = true;
-
         while (agregando) {
-            System.out.print("ID del producto a agregar (0 para terminar): ");
-            int id = scanner.nextInt();
-
+            int id = capturarEntero("ID del producto a agregar (0 para terminar)");
             if (noContinuaElPedido(id)) {
                 agregando = false;
             } else {
-                System.out.print("Cantidad: ");
-                int cant = scanner.nextInt();
-                pedidoService.agregarItemAlPedido(id, cant, new ConsolaUI());
+                int cant = capturarEntero("Cantidad");
+                pedidoService.agregarItemAlPedido(id, cant, this.consolaUI);
             }
         }
-
-        System.out.println("\nTotal del pedido acumulado: $" + pedidoService.obtenerTotal());
-        System.out.print("¿Desea (C)onfirmar la compra o (A)nular el pedido? ");
-        String respuesta = scanner.next();
-
+        consolaUI.mostrarMensaje("\nTotal del pedido acumulado: $" + pedidoService.obtenerTotal());
+        String respuesta = capturarTexto("¿Desea (C)onfirmar la compra o (A)nular el pedido?");
         if (respuesta.equalsIgnoreCase("C")) {
-            pedidoService.finalizarPedido(new ConsolaUI());
+            pedidoService.finalizarPedido(this.consolaUI);
         } else {
             pedidoService.cancelarPedido();
-            System.out.println("Pedido cancelado. El inventario no ha sido modificado.");
+            consolaUI.mostrarMensaje("Pedido cancelado. El inventario no ha sido modificado.");
         }
     }
     private boolean noContinuaElPedido(int opcion) {
