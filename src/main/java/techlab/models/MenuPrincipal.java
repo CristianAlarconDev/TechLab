@@ -31,7 +31,7 @@ public class MenuPrincipal {
         System.out.println("\n=== SISTEMA DE GESTIÓN - TECHLAB ===");
         System.out.println("1) Agregar producto");
         System.out.println("2) Listar productos");
-        System.out.println("3) Buscar/Actualizar producto");
+        System.out.println("3) Buscar producto" );
         System.out.println("4) Eliminar producto");
         System.out.println("5) Crear un pedido");
         System.out.println("6) Listar pedidos (Resumen)");
@@ -67,6 +67,19 @@ public class MenuPrincipal {
         System.out.print("Stock: ");
         int stock = scanner.nextInt();
         productoService.agregarProducto(new Producto(nombre, descripcion, precio, id, stock));
+    }
+    //desacoplar luego del print
+    private void subMenuBuscarProducto() {
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Ingrese ID a buscar: ");
+        int id = scanner.nextInt();
+        try {
+            System.out.println("Producto encontrado: " + productoService.mostrarInformacionPorID(id));
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
     private int capturarEntero() {
         try {

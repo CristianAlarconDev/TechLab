@@ -32,6 +32,9 @@ public class ProductoService {
     {   //recordar que quien use vendible debe usar try-catch para el manejo
         return obtenerProducto(idProducto);
     }
+    public String mostrarInformacionPorID(int idProducto){
+        return obtenerProducto(idProducto).mostrarInformacion();
+    }
     private Producto obtenerProducto(int idProducto)
     {
         if(idProducto <= 0){
