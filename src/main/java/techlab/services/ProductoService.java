@@ -35,6 +35,17 @@ public class ProductoService {
     public String mostrarInformacionPorID(int idProducto){
         return obtenerProducto(idProducto).mostrarInformacion();
     }
+    public String actualizarPrecioDe(int idProducto, int precio)
+    {
+        Producto producto = obtenerProducto(idProducto);
+        producto.actualizarPrecio(precio);
+        return mostrarInformacionPorID(idProducto);
+    }
+    public String actualizarStockDe(int idProducto, int stock){
+        Producto producto = obtenerProducto(idProducto);
+        producto.cambiarStock(stock);
+        return mostrarInformacionPorID(idProducto);
+    }
     private Producto obtenerProducto(int idProducto)
     {
         if(idProducto <= 0){
