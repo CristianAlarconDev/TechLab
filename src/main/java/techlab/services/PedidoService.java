@@ -7,15 +7,20 @@ import techlab.models.Pedido;
 import techlab.models.Vendible;
 import techlab.models.ItemPedido;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PedidoService {
     private ProductoService productoService;
     private GeneradorID generador;
     private Pedido pedidoEnProceso;
+    private List<Pedido> pedidosHechos;
     public PedidoService( ProductoService productoService)
     {
         this.generador = new GeneradorID();
         this.pedidoEnProceso = null;
         this.productoService = productoService;
+        this.pedidosHechos = new ArrayList<Pedido>();
     }
     public void iniciarPedido()
     {
@@ -58,10 +63,20 @@ public class PedidoService {
             }
             System.out.println("Pedido finalizado con éxito.");
             System.out.println(pedidoEnProceso.obtenerResumen());
-
+            pedidosHechos.add(pedidoEnProceso);
             pedidoEnProceso = null;
         } catch (Exception e) {
             System.err.println("Error crítico al procesar el pedido: " + e.getMessage());
+        }
+    }
+    public void mostrarHistorialDePedidos() {
+        if (pedidosHechos.isEmpty()) {
+            System.out.println("Sin historial de pedidos aún.");
+            return;
+        }
+        System.out.println("--- HISTORIAL DE VENTAS ---");
+        for (Pedido pedido : pedidosHechos) {
+            System.out.println(pedido.obtenerResumen());
         }
     }
     private void checkPedidoEnProceso(){
