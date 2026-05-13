@@ -58,6 +58,15 @@ public class ProductoService {
         }
         throw new IdNoEncontradoException("No existe el producto con ID: " + idProducto);
     }
+    public String buscarPorNombre(String nombre) throws Exception {
+        String nombreParseado = nombre.trim();
+        for (Producto producto : productos) {
+            if (producto.tieneNombre(nombreParseado)) {
+                return producto.mostrarInformacion();
+            }
+        }
+        throw new Exception("No se encontró ningún producto con el nombre: " + nombre);
+    }
    public boolean hayStockDeProducto(int idProducto, int cantidad)
     {
         Producto producto = obtenerProducto(idProducto);
