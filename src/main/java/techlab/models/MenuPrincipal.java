@@ -46,7 +46,7 @@ public class MenuPrincipal {
             case 3 -> subMenuBuscarProducto();
             case 4 -> subMenuEliminarProducto();
             case 5 -> subMenuIniciarPedido();
-            case 6 -> System.out.println("todavia no impl porque pedido service no enlista todos los pedidos hechos");
+            case 6 -> pedidoService.mostrarHistorialDePedidos();
             case 7 -> {
                 System.out.println("Cerrando sistema...");
                 seguirMostrando = false;
