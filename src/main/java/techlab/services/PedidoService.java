@@ -55,6 +55,10 @@ public class PedidoService {
         checkPedidoEnProceso();
         return pedidoEnProceso.obtenerTotal();
     }
+    public void cancelarPedido(){
+        checkPedidoEnProceso();
+        this.pedidoEnProceso=null;
+    }
     public void finalizarPedido(){
         checkPedidoEnProceso();
         try {
