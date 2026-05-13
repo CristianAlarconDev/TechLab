@@ -4,6 +4,7 @@ package techlab.models;
 import techlab.services.ProductoService;
 import techlab.services.PedidoService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuPrincipal {
@@ -11,12 +12,19 @@ public class MenuPrincipal {
     private final PedidoService pedidoService;
     private final Scanner scanner;
     private boolean seguirMostrando;
+    private ConsolaUI consolaUI;
+    private List<String> opciones;
 
     public MenuPrincipal(ProductoService ps, PedidoService pedS) {
         this.productoService = ps;
         this.pedidoService = pedS;
         this.scanner = new Scanner(System.in);
         this.seguirMostrando = true;
+        this.consolaUI = new ConsolaUI();
+        this.opciones = List.of(
+                "Agregar producto", "Listar productos", "Buscar producto", "Actualizar producto",
+                "Eliminar producto", "Crear un pedido", "Listar pedidos (Resumen)", "Salir"
+        );
     }
 
     public void lanzar() {
@@ -28,16 +36,11 @@ public class MenuPrincipal {
     }
 
     private void mostrarOpciones() {
-        System.out.println("\n=== SISTEMA DE GESTIÓN - TECHLAB ===");
-        System.out.println("1) Agregar producto");
-        System.out.println("2) Listar productos");
-        System.out.println("3) Buscar producto" );
-        System.out.println("4) Actualizar producto" );
-        System.out.println("5) Eliminar producto");
-        System.out.println("6) Crear un pedido");
-        System.out.println("7) Listar pedidos (Resumen)");
-        System.out.println("8) Salir");
-        System.out.print("Elija una opción: ");
+        consolaUI.mostrarMensaje("\n=== SISTEMA DE GESTIÓN - TECHLAB ===");
+        for (int i = 0; i < opciones.size(); i++) {
+            consolaUI.mostrarMensaje((i + 1) + ") " + opciones.get(i));
+        }
+        consolaUI.mostrarMensaje("Elija una opción: ");
     }
 
     private void procesarOpcion(int opcion) {
