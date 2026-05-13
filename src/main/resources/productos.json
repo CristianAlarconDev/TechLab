@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "nombre": "Smartphone Galaxy S23",
+    "descripcion": "Pantalla AMOLED 6.1, 128GB",
+    "precio": 850000,
+    "stock": 15
+  },
+  {
+    "id": 2,
+    "nombre": "Laptop MacBook Air M2",
+    "descripcion": "Pantalla Retina 13, 8GB RAM, 256GB SSD",
+    "precio": 1400000,
+    "stock": 8
+  },
+  {
+    "id": 3,
+    "nombre": "Auriculares Sony WH-1000XM5",
+    "descripcion": "Cancelación de ruido líder en la industria",
+    "precio": 450000,
+    "stock": 20
+  },
+  {
+    "id": 4,
+    "nombre": "Monitor LG UltraGear 27",
+    "descripcion": "QHD, 144Hz, 1ms, IPS",
+    "precio": 320000,
+    "stock": 12
+  },
+  {
+    "id": 5,
+    "nombre": "Teclado Razer BlackWidow",
+    "descripcion": "Mecánico, Switches verdes, RGB",
+    "precio": 120000,
+    "stock": 25
+  },
+  {
+    "id": 6,
+    "nombre": "Mouse Logitech G502 Hero",
+    "descripcion": "Sensor 25K, 11 botones programables",
+    "precio": 65000,
+    "stock": 30
+  },
+  {
+    "id": 7,
+    "nombre": "Tablet iPad Pro 11",
+    "descripcion": "Chip M2, 128GB, WiFi",
+    "precio": 1100000,
+    "stock": 10
+  },
+  {
+    "id": 8,
+    "nombre": "Cámara Sony Alpha 7 IV",
+    "descripcion": "Sensor Full-frame 33MP, Video 4K 60p",
+    "precio": 2800000,
+    "stock": 5
+  },
+  {
+    "id": 9,
+    "nombre": "Smartwatch Apple Watch Series 9",
+    "descripcion": "Caja de aluminio, GPS, 45mm",
+    "precio": 550000,
+    "stock": 18
+  },
+  {
+    "id": 10,
+    "nombre": "Consola PlayStation 5",
+    "descripcion": "Edición Disco, 825GB SSD",
+    "precio": 950000,
+    "stock": 7
+  },
+  {
+    "id": 11,
+    "nombre": "Disco Externo WD My Passport 2TB",
+    "descripcion": "USB 3.0, cifrado de hardware",
+    "precio": 85000,
+    "stock": 40
+  },
+  {
+    "id": 12,
+    "nombre": "Placa de Video RTX 4070 Ti",
+    "descripcion": "12GB GDDR6X, Ray Tracing",
+    "precio": 1250000,
+    "stock": 4
+  },
+  {
+    "id": 13,
+    "nombre": "Memoria RAM Corsair Vengeance 32GB",
+    "descripcion": "2x16GB, DDR5 5200MHz",
+    "precio": 180000,
+    "stock": 15
+  },
+  {
+    "id": 14,
+    "nombre": "Procesador Intel Core i7-13700K",
+    "descripcion": "16 núcleos, hasta 5.4GHz",
+    "precio": 520000,
+    "stock": 9
+  },
+  {
+    "id": 15,
+    "nombre": "Gabinete NZXT H5 Flow",
+    "descripcion": "Panel frontal de malla, cristal templado",
+    "precio": 110000,
+    "stock": 12
+  },
+  {
+    "id": 16,
+    "nombre": "Fuente EVGA 750W Gold",
+    "descripcion": "80 Plus Gold, Modular",
+    "precio": 145000,
+    "stock": 14
+  },
+  {
+    "id": 17,
+    "nombre": "SSD NVMe Samsung 980 Pro 1TB",
+    "descripcion": "PCIe Gen 4.0, 7000MB/s",
+    "precio": 130000,
+    "stock": 22
+  },
+  {
+    "id": 18,
+    "nombre": "Parlantes Edifier R1280T",
+    "descripcion": "Monitores de estudio activos",
+    "precio": 155000,
+    "stock": 11
+  },
+  {
+    "id": 19,
+    "nombre": "Microscopio Digital USB",
+    "descripcion": "Aumento 1000x, 8 LEDs",
+    "precio": 45000,
+    "stock": 10
+  },
+  {
+    "id": 20,
+    "nombre": "Kit Soldador de Estaño Pro",
+    "descripcion": "Temperatura regulable, accesorios",
+    "precio": 35000,
+    "stock": 15
+  }
+]
