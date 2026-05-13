@@ -2,10 +2,7 @@ package techlab.services;
 
 import techlab.exceptions.IdNoEncontradoException;
 import techlab.exceptions.PedidoNoIniciadoException;
-import techlab.models.GeneradorID;
-import techlab.models.Pedido;
-import techlab.models.Vendible;
-import techlab.models.ItemPedido;
+import techlab.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,20 +24,20 @@ public class PedidoService {
         pedidoEnProceso = new Pedido(generador.obtenerId());
 
     }
-    public void agregarItemAlPedido(int idProducto, int cantidad){
+    public void agregarItemAlPedido(int idProducto, int cantidad, ConsolaUI ui){
         checkPedidoEnProceso();
         try {
             if(productoService.hayStockDeProducto(idProducto, cantidad)){
                 Vendible vendible = productoService.obtenerVendible(idProducto);
                 ItemPedido nuevoItem = new ItemPedido(cantidad, vendible);
                 pedidoEnProceso.agregarItem(nuevoItem);
-                System.out.println("Agregado: " + vendible.obtenerNombre() + " x" + cantidad);
+                ui.mostrarMensaje("Agregado: " + vendible.obtenerNombre() + " x" + cantidad);
             }
 
         }
         catch (Exception error)
             {
-            System.err.println("Error al agregar el item al pedido." + error.getMessage());
+            ui.mostrarMensaje("Error al agregar el item al pedido." + error.getMessage());
             }
     }
     public void eliminarItemAlPedido(int idVendible){
@@ -59,28 +56,28 @@ public class PedidoService {
         checkPedidoEnProceso();
         this.pedidoEnProceso=null;
     }
-    public void finalizarPedido(){
+    public void finalizarPedido(ConsolaUI ui){
         checkPedidoEnProceso();
         try {
             for (ItemPedido item : pedidoEnProceso.obtenerItems()) {
                 productoService.descontarStock(item.obtenerId(), item.obtenerCantidad());
             }
-            System.out.println("Pedido finalizado con éxito.");
-            System.out.println(pedidoEnProceso.obtenerResumen());
+            ui.mostrarMensaje("Pedido finalizado con éxito.");
+            ui.mostrarMensaje(pedidoEnProceso.obtenerResumen());
             pedidosHechos.add(pedidoEnProceso);
             pedidoEnProceso = null;
         } catch (Exception e) {
-            System.err.println("Error crítico al procesar el pedido: " + e.getMessage());
+            ui.mostrarMensaje("Error crítico al procesar el pedido: " + e.getMessage());
         }
     }
-    public void mostrarHistorialDePedidos() {
+    public void mostrarHistorialDePedidos(ConsolaUI ui) {
         if (pedidosHechos.isEmpty()) {
-            System.out.println("Sin historial de pedidos aún.");
+            ui.mostrarMensaje("Sin historial de pedidos aún.");
             return;
         }
-        System.out.println("--- HISTORIAL DE VENTAS ---");
+        ui.mostrarMensaje("--- HISTORIAL DE VENTAS ---");
         for (Pedido pedido : pedidosHechos) {
-            System.out.println(pedido.obtenerResumen());
+            ui.mostrarMensaje(pedido.obtenerResumen());
         }
     }
     private void checkPedidoEnProceso(){
