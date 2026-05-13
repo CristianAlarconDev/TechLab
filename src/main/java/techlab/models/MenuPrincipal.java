@@ -30,7 +30,7 @@ public class MenuPrincipal {
     public void lanzar() {
         while (seguirMostrando) {
             mostrarOpciones();
-            int opcion = capturarEntero("Elija una opción");
+            int opcion = capturarEntero("Seleccione una opción");
             procesarOpcion(opcion);
         }
     }
@@ -40,7 +40,6 @@ public class MenuPrincipal {
         for (int i = 0; i < opciones.size(); i++) {
             consolaUI.mostrarMensaje((i + 1) + ") " + opciones.get(i));
         }
-        consolaUI.mostrarMensaje("Elija una opción: ");
     }
 
     private void procesarOpcion(int opcion) {
