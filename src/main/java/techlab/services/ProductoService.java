@@ -2,6 +2,7 @@ package techlab.services;
 
 import techlab.exceptions.IdNoEncontradoException;
 import techlab.models.ConsolaUI;
+import techlab.models.GeneradorID;
 import techlab.models.Producto;
 import techlab.models.Vendible;
 
@@ -10,13 +11,20 @@ import java.util.List;
 
 public class ProductoService {
     private List<Producto> productos;
+    private GeneradorID generador;
     public ProductoService()
     {
         productos = new ArrayList<Producto>();
+        this.generador = new GeneradorID();
     }
-    public void agregarProducto(Producto producto)
-    {
-        productos.add(producto);
+    public void agregarProducto(Producto p) {
+        generador.sincronizarSiEsMayor(p.obtenerID());
+        productos.add(p);
+    }
+    public void agregarProducto(String nombre, String desc, int precio, int stock) {
+        int nuevoId = generador.obtenerId();
+        Producto nuevo = new Producto(nombre, desc, precio, nuevoId, stock);
+        productos.add(nuevo);
     }
     public void  eliminarProducto(int idProducto, ConsolaUI ui) {
         /*luego llevar los print a una clase o delegarlo*/
