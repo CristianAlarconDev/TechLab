@@ -37,6 +37,9 @@ public class Producto implements Vendible {
         }
         this.precio = precio;
     }
+    public boolean tieneNombre(String nombre) {
+        return nombre.equalsIgnoreCase(this.nombre);
+    }
      public void cambiarStock(int stock) {
         if(stock<0){
             throw new StockInvalidoException("Cantidad invalida a aumentar");
