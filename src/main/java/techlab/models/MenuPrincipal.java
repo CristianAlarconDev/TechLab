@@ -48,7 +48,7 @@ public class MenuPrincipal {
             case 4 -> subMenuActualizarProducto();
             case 5 -> subMenuEliminarProducto();
             case 6 -> subMenuIniciarPedido();
-            case 7 -> pedidoService.mostrarHistorialDePedidos();
+            case 7 -> pedidoService.mostrarHistorialDePedidos(new ConsolaUI());
             case 8 -> {
                 System.out.println("Cerrando sistema...");
                 seguirMostrando = false;
@@ -141,7 +141,7 @@ public class MenuPrincipal {
             } else {
                 System.out.print("Cantidad: ");
                 int cant = scanner.nextInt();
-                pedidoService.agregarItemAlPedido(id, cant);
+                pedidoService.agregarItemAlPedido(id, cant, new ConsolaUI());
             }
         }
 
@@ -150,7 +150,7 @@ public class MenuPrincipal {
         String respuesta = scanner.next();
 
         if (respuesta.equalsIgnoreCase("C")) {
-            pedidoService.finalizarPedido();
+            pedidoService.finalizarPedido(new ConsolaUI());
         } else {
             pedidoService.cancelarPedido();
             System.out.println("Pedido cancelado. El inventario no ha sido modificado.");
