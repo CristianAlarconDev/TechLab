@@ -31,17 +31,17 @@ public class Producto implements Vendible {
     public int obtenerPrecio() {
         return precio;
     }
-    public int actualizarPrecio(int precio) {
+    public void actualizarPrecio(int precio) {
         if(precio<0){
             throw new PrecioInvalidoException("Precio invalido");
         }
-        return this.precio = precio;
+        this.precio = precio;
     }
-     public void aumentarStock(int stock) {
+     public void cambiarStock(int stock) {
         if(stock<0){
             throw new StockInvalidoException("Cantidad invalida a aumentar");
         }
-        this.stock += stock;
+        this.stock = stock;
      }
      public void reducirStock(int stock) {
         if(stock<0){
