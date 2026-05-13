@@ -43,7 +43,7 @@ public class MenuPrincipal {
         switch (opcion) {
             case 1 -> subMenuAgregarProducto();
             case 2 -> productoService.mostrarProductos();
-            case 3 -> System.out.println("Nada ");
+            case 3 -> subMenuBuscarProducto();
             case 4 -> System.out.println("Nada aun");
             case 5 -> System.out.println("Nada todavía");
             case 6 -> System.out.println("Total acumulado: $" + pedidoService.obtenerTotal());
