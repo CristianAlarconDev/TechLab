@@ -72,15 +72,27 @@ public class MenuPrincipal {
     }
     //desacoplar luego del print
     private void subMenuBuscarProducto() {
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Ingrese ID a buscar: ");
-        int id = scanner.nextInt();
+        System.out.println("\n--- BÚSQUEDA DE PRODUCTO ---");
+        System.out.println("1. Buscar por ID");
+        System.out.println("2. Buscar por Nombre");
+        System.out.print("Seleccione una opción: ");
+        int modo = capturarEntero();
         try {
-            System.out.println("Producto encontrado: " + productoService.mostrarInformacionPorID(id));
-
+            switch (modo) {
+                case 1 -> {
+                    System.out.print("Ingrese ID a buscar: ");
+                    int id = capturarEntero();
+                    System.out.println("Producto encontrado: " + productoService.mostrarInformacionPorID(id));
+                }
+                case 2 -> {
+                    System.out.print("Ingrese nombre del producto: ");
+                    String nombre = scanner.nextLine();
+                    System.out.println("Producto encontrado: " + productoService.buscarPorNombre(nombre));
+                }
+                default -> System.out.println("Opción de búsqueda no válida.");
+            }
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
     private void subMenuActualizarProducto() {
