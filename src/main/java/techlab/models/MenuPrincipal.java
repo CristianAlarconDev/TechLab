@@ -45,8 +45,8 @@ public class MenuPrincipal {
             case 2 -> productoService.mostrarProductos();
             case 3 -> subMenuBuscarProducto();
             case 4 -> subMenuEliminarProducto();
-            case 5 -> System.out.println("Nada todavía");
-            case 6 -> System.out.println("Total acumulado: $" + pedidoService.obtenerTotal());
+            case 5 -> subMenuIniciarPedido();
+            case 6 -> System.out.println("todavia no impl porque pedido service no enlista todos los pedidos hechos");
             case 7 -> {
                 System.out.println("Cerrando sistema...");
                 seguirMostrando = false;
@@ -85,6 +85,31 @@ public class MenuPrincipal {
         System.out.print("Ingrese ID a eliminar: ");
         int id = scanner.nextInt();
         productoService.eliminarProducto(id);
+    }
+    private void subMenuIniciarPedido() {
+        pedidoService.iniciarPedido();
+        boolean agregando = true;
+
+        while (agregando) {
+            System.out.print("ID del producto a agregar (0 para terminar): ");
+            int id = scanner.nextInt();
+
+            if (noContinuaElPedido(id)) {
+                agregando = false;
+            } else {
+                System.out.print("Cantidad: ");
+                int cant = scanner.nextInt();
+                pedidoService.agregarItemAlPedido(id, cant);
+            }
+        }
+
+        System.out.print("¿Confirmar pedido y descontar stock? (S/N): ");
+        if (scanner.next().equalsIgnoreCase("S")) {
+            pedidoService.finalizarPedido();
+        }
+    }
+    private boolean noContinuaElPedido(int opcion) {
+        return opcion==0;
     }
     private int capturarEntero() {
         try {
