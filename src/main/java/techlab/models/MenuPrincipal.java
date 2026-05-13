@@ -43,7 +43,7 @@ public class MenuPrincipal {
     private void procesarOpcion(int opcion) {
         switch (opcion) {
             case 1 -> subMenuAgregarProducto();
-            case 2 -> productoService.mostrarProductos();
+            case 2 -> productoService.mostrarProductos(new ConsolaUI());
             case 3 -> subMenuBuscarProducto();
             case 4 -> subMenuActualizarProducto();
             case 5 -> subMenuEliminarProducto();
@@ -126,7 +126,7 @@ public class MenuPrincipal {
     private void subMenuEliminarProducto() {
         System.out.print("Ingrese ID a eliminar: ");
         int id = scanner.nextInt();
-        productoService.eliminarProducto(id);
+        productoService.eliminarProducto(id, new ConsolaUI());
     }
     private void subMenuIniciarPedido() {
         pedidoService.iniciarPedido();
