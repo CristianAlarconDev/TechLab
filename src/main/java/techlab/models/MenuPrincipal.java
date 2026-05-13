@@ -133,9 +133,15 @@ public class MenuPrincipal {
             }
         }
 
-        System.out.print("¿Confirmar pedido y descontar stock? (S/N): ");
-        if (scanner.next().equalsIgnoreCase("S")) {
+        System.out.println("\nTotal del pedido acumulado: $" + pedidoService.obtenerTotal());
+        System.out.print("¿Desea (C)onfirmar la compra o (A)nular el pedido? ");
+        String respuesta = scanner.next();
+
+        if (respuesta.equalsIgnoreCase("C")) {
             pedidoService.finalizarPedido();
+        } else {
+            pedidoService.cancelarPedido();
+            System.out.println("Pedido cancelado. El inventario no ha sido modificado.");
         }
     }
     private boolean noContinuaElPedido(int opcion) {
