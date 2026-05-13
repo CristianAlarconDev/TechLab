@@ -44,7 +44,7 @@ public class MenuPrincipal {
             case 1 -> subMenuAgregarProducto();
             case 2 -> productoService.mostrarProductos();
             case 3 -> subMenuBuscarProducto();
-            case 4 -> System.out.println("Nada aun");
+            case 4 -> subMenuEliminarProducto();
             case 5 -> System.out.println("Nada todavía");
             case 6 -> System.out.println("Total acumulado: $" + pedidoService.obtenerTotal());
             case 7 -> {
@@ -80,6 +80,11 @@ public class MenuPrincipal {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+    }
+    private void subMenuEliminarProducto() {
+        System.out.print("Ingrese ID a eliminar: ");
+        int id = scanner.nextInt();
+        productoService.eliminarProducto(id);
     }
     private int capturarEntero() {
         try {
