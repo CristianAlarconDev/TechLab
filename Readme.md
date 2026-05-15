@@ -17,4 +17,6 @@ Sistema de gestión de productos y pedidos desarrollado en Java. Este proyecto a
 - `models`: Entidades y utilidades (Producto, Pedido, GeneradorID, Parser).
 - `ui`: Interfaz de usuario por consola (MenuPrincipal, ConsolaUI).
 
+
+[ Informe Técnico del Proyecto (PDF)](docs/Informe-Implementacion-TechLab.pdf)
 [Mi Portafolio](https://cristian-alarcon-developer.netlify.app/)
