@@ -11,12 +11,27 @@ Sistema de gestión de productos y pedidos desarrollado en Java. Este proyecto a
 ##  Tecnologías
 - Java 21+
 - Jackson (Procesamiento de JSON)
-
+- 
+##  Requisitos
+Antes de proceder con la compilación y ejecución se debe tener las siguientes herramientas instaladas y configuradas:
+- **Java JDK 21** o superior.
+- **Apache Maven 3.x** o superior.
+- 
 ##  Estructura
 - `services`: Lógica de negocio (ProductoService, PedidoService).
 - `models`: Entidades y utilidades (Producto, Pedido, GeneradorID, Parser).
 - `ui`: Interfaz de usuario por consola (MenuPrincipal, ConsolaUI).
+- 
+##  Compilación y Ejecución
 
+Para compilar y correr el proyecto desde la terminal utilizando el **JDK** y **Maven**, en la raíz del proyecto ejecuta los siguientes comandos:
 
+1. **Limpiar el entorno y compilar el código fuente:**
+   ```bash
+   mvn clean compile
+    ```
+   ``` bash
+   mvn exec:java
+   ```
 [ Informe Técnico del Proyecto (PDF)](docs/Informe-Implementacion-TechLab.pdf)
 [Mi Portafolio](https://cristian-alarcon-developer.netlify.app/)
